@@ -1,0 +1,27 @@
+# General .gitignore
+.DS_Store
+node_modules/
+.env
+*.pyc
+__pycache__/
+dist/
+build/
+.vscode/
+.idea/
+*.log
+coverage/
+*.egg-info/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.out
+*.class
+*.jar
+*.war
+*.iml
+*.db
+*.sqlite
+*.sqlite3
+*.ipynb_checkpoints/
+# End of template
