@@ -1,27 +1,57 @@
-# General .gitignore
-.DS_Store
-node_modules/
-.env
-*.pyc
+# Python ignores
 __pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
 dist/
 build/
+.eggs/
+*.pyo
+*.pyd
+*.pdb
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.pyre/
+.mypy_cache/
+.pytype/
+
+# VSCode workspace ignores
 .vscode/
-.idea/
+.history/
+
+# macOS
+.DS_Store
+
+# General
 *.log
-coverage/
-*.egg-info/
+*.tmp
+*.bak
 *.swp
 *.swo
-*.bak
-*.tmp
 *.out
-*.class
-*.jar
-*.war
-*.iml
 *.db
 *.sqlite
 *.sqlite3
+*.iml
+*.class
+*.jar
+*.war
+.idea/
+
+# Jupyter
 *.ipynb_checkpoints/
+
 # End of template
