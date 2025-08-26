@@ -1,0 +1,68 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: proxy
+    depends_on: [python, n8n, ngrok]
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    environment:
+      - TZ=${TIMEZONE}
+    ports:
+      - "8080:80"          # Nginx (reverse proxy)
+    restart: unless-stopped
+    networks: [appnet]
+
+  python:
+    build: ./python
+    container_name: pyapp
+    environment:
+      - TZ=${TIMEZONE}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "8000:8000"        # FastAPI exposed directly
+    restart: unless-stopped
+    networks: [appnet]
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      - TZ=${TIMEZONE}
+      - N8N_PATH=/n8n/
+      - N8N_HOST=${URL}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - N8N_PUBLIC_URL=https://${URL}/n8n/
+      - N8N_EDITOR_BASE_URL=https://${URL}/n8n/
+      - WEBHOOK_URL=https://${URL}/n8n/
+      - WEBHOOK_TUNNEL_URL=https://${URL}/n8n/
+      - N8N_SKIP_WEBHOOK_DEREGISTRATION=true
+      - GENERIC_TIMEZONE=${TIMEZONE}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    ports:
+      - "5678:5678"        # n8n exposed directly
+    networks: [appnet]
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    restart: unless-stopped
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_TOKEN}
+      - TZ=${TIMEZONE}
+    command: ["http", "--url=${URL}", "nginx:80"]
+    ports:
+      - "4040:4040"        # ngrok dashboard exposed locally
+    networks: [appnet]
+
+networks:
+  appnet:
+
+volumes:
+  n8n_data:

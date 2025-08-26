@@ -1,0 +1,18 @@
+# Dockerfile.n8n
+FROM n8nio/n8n:latest
+
+USER root
+WORKDIR /tmp
+
+RUN apk add --no-cache python3 py3-pip bash
+
+COPY requirements.txt /tmp/requirements.txt
+
+# 👇 allow pip to write to system site-packages (container-only; safe here)
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+
+RUN mkdir -p /workspace && chown -R node:node /workspace
+
+USER node
+WORKDIR /data

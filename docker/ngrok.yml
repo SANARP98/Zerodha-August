@@ -1,0 +1,7 @@
+version: 2
+log_level: debug
+tunnels:
+  edge:
+    proto: http
+    addr: edge:8080
+    domain: ethical-unlikely-cattle.ngrok-free.app
