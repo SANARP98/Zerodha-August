@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Stack</title>
+  <style>
+    :root { --bg:#0b1220; --card:#121a2a; --text:#e7eefc; --accent:#4f8cff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+           background:linear-gradient(180deg, #0b1220, #0f1730); color:var(--text); display:grid; place-items:center; min-height:100dvh; }
+    .wrap { width:min(900px, 92%); text-align:center; }
+    h1 { font-weight:700; margin:18px 0 8px; letter-spacing:.2px; }
+    p { margin:0 0 26px; opacity:.8 }
+    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); }
+    .btn { display:block; padding:16px 18px; border-radius:14px; text-decoration:none; color:var(--text);
+           background:var(--card); border:1px solid #1f2a44; box-shadow:0 6px 18px rgba(0,0,0,.25); transition:.18s ease; }
+    .btn:hover { transform:translateY(-2px); border-color:var(--accent); box-shadow:0 10px 26px rgba(79,140,255,.25); }
+    .badge { display:inline-block; font-size:12px; opacity:.7; margin-top:8px }
+    .tiny { margin-top:26px; opacity:.6; font-size:12px }
+    .emoji { margin-right:.4ch }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Simple Stack</h1>
+    <p>Pick a service to open:</p>
+    <div class="grid">
+      <a class="btn" href="/py/"><span class="emoji">🐍</span>FastAPI<span class="badge">/py/</span></a>
+      <a class="btn" href="/n8n/"><span class="emoji">🧩</span>n8n Editor<span class="badge">/n8n/</span></a>
+      <a class="btn" href="/ngrok/"><span class="emoji">🛰️</span>ngrok Dashboard<span class="badge">/ngrok/</span></a>
+    </div>
+    <div class="tiny">Served by Nginx</div>
+  </main>
+</body>
+</html>

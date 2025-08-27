@@ -5,6 +5,7 @@ services:
     depends_on: [python, n8n, ngrok]
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./site:/usr/share/nginx/html:ro   # <— add this
     environment:
       - TZ=${TIMEZONE}
     ports:
